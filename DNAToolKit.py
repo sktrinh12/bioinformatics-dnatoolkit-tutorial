@@ -79,3 +79,53 @@ def codon_usage(seq, aminoacid):
         freqDict[seq] = round(freqDict[seq] / totalWeight, 2)
     return freqDict
 #}
+
+#{
+def gen_reading_frames(seq):
+    """
+    Generate the six reading frames of a DNA sequence, including the reverse
+    complement
+    """
+    frames = []
+    # read from the beginning frame and then second and third
+
+    # DNA has two strands, the ribosome can read an RNA derived
+    # from one strand or another, and it can read it in 1-2-3s
+    # that are separated one from another so you can actually
+    # get three reading frames reading in one direction, three
+    # reading frames going in the other direction. So it's actually
+    # six different reading frames for every piece of DNA, which
+    # might give you an open reading frame.
+    frames.append(translate_seq(seq, 0))
+    frames.append(translate_seq(seq, 1))
+    frames.append(translate_seq(seq, 2))
+    frames.append(translate_seq(reverse_complement(seq), 0))
+    frames.append(translate_seq(reverse_complement(seq), 1))
+    frames.append(translate_seq(reverse_complement(seq), 2))
+    return frames
+#}
+
+#{
+def proteins_from_rf(aa_seq):
+    """
+    Compute all possible proteins in an amino acid sequence and return a list of possible proteins
+    """
+    current_prot = []
+    proteins = []
+    for aa in aa_seq:
+        if aa == "_":
+            # STOP accumulating amino acids if _ - STOP was found
+            if current_prot:
+                for p in current_prot:
+                    proteins.append(p)
+                # reset for next protein
+                current_prot = []
+        else:
+            # START accumlating amino acids if M - START was found
+            if aa == "M":
+                # dummy variable to add the first amino acid of the start codon
+                current_prot.append("")
+            for i in range(len(current_prot)):
+                current_prot[i] += aa
+    return proteins
+#}
