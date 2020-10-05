@@ -81,8 +81,8 @@ class bio_seq:
         seq_ = self.seq
         if within_fx_seq:
             seq_ = within_fx_seq
-        gc_content = 100*round((seq_.count('C') + seq_.count('G')) /len(seq_),2)
-        return gc_content
+        gc_content = 100*(seq_.count('C') + seq_.count('G')) /len(seq_)
+        return round(gc_content, 7)
 
     def gc_content_subsec(self, k=20):
         """
