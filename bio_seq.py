@@ -204,3 +204,24 @@ class bio_seq:
         if ordered:
             return sorted(res, key=len, reverse=True)
         return res
+
+    def hamming_distance(self, compare_seq):
+        """
+        Count the hamming distance which is minimum number of symbol
+        substitutions required to change oen string to another of equal length
+
+        A mutation is simply a mistake that occurs during the creation or copying of a
+        nucleic acid, in particular DNA. Because nucleic acids are vital to cellular
+        functions, mutations tend to cause a ripple effect throughout the cell.
+        The simplest and most common type of nucleic acid mutation is a point mutation,
+        which replaces one base with another at a single nucleotide.
+        """
+        assert len(self.seq) == len(compare_seq),\
+            f'sequences have to be the same length to compare, the lengths are: {len(self.seq)} vs. {len(compare_seq)}'
+        ham_dist_count = 0
+        for nuc_a, nuc_b in zip(self.seq, compare_seq):
+            if nuc_a != nuc_b:
+                ham_dist_count += 1
+
+        return ham_dist_count
+
