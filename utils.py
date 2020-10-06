@@ -19,12 +19,12 @@ def coloured(seq):
     return tmpStr + '\033[0;0m'
 
 
-def readTextFile(file_path):
+def readTextFile(file_path, delim=''):
     """
     read csv, txt files
     """
     with open (file_path, 'r') as f:
-        return ''.join([l.strip() for l in f.readlines()])
+        return f'{delim}'.join([l.strip() for l in f.readlines()])
 
 
 def writeTextFile(file_path, seq, mode = 'w'):
