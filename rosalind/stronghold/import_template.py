@@ -1,10 +1,11 @@
 import sys
 import os
 
-parent_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(1, os.path.join(sys.path[0], '..', '..'))
+# parent_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # print(parent_path)
 
-sys.path.append(parent_path)
+# sys.path.append(parent_path)
 from bio_seq import bio_seq
 from utils import readTextFile, read_FASTA
 
