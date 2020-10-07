@@ -1,8 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..', '..'))
-from bio_seq import *
-from utils import readTextFile
+from import_template import *
 
 
 DNAString = bio_seq('AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC')
