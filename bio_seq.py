@@ -94,14 +94,27 @@ class bio_seq:
             res.append(self.gc_content(subseq))
         return res
 
-    def translate_seq(self, init_pos=0):
+    def translate_seq(self, init_pos=0, show_end=True, return_type=list):
         """
         Translates a DNA sequence into an amino acid sequence; jumps of 3
         """
+        assert return_type in [list, str], 'return type has to be a list or a string'
+        assert isinstance(show_end, int), 'show_start_end variable has to be a boolean'
         if self.seq_type == 'DNA':
-            return [DNA_CODONS[self.seq[pos:pos + 3]] for pos in range(init_pos, len(self.seq) -2, 3)]
+            protein_letters = [DNA_CODONS[self.seq[pos:pos + 3]] for pos in range(init_pos, len(self.seq) -2, 3)]
+            if not show_end:
+                protein_letters = protein_letters[0:-1]
+            if return_type == str:
+                protein_letters = ''.join(protein_letters)
+            return protein_letters
+
         elif self.seq_type == 'RNA':
-            return [RNA_CODONS[self.seq[pos:pos + 3]] for pos in range(init_pos, len(self.seq) -2, 3)]
+            protein_letters = [RNA_CODONS[self.seq[pos:pos + 3]] for pos in range(init_pos, len(self.seq) -2, 3)]
+            if not show_end:
+                protein_letters = protein_letters[0:-1]
+            if return_type == str:
+                protein_letters = ''.join(protein_letters)
+            return protein_letters
 
     def codon_usage(self, aminoacid):
         """
