@@ -97,6 +97,8 @@ class bio_seq:
     def translate_seq(self, init_pos=0, show_end=True, return_type=list):
         """
         Translates a DNA sequence into an amino acid sequence; jumps of 3
+        Optional return type is either a list of strings or one concatenated
+        string; and an argument that shows the '_' stop codon or not
         """
         assert return_type in [list, str], 'return type has to be a list or a string'
         assert isinstance(show_end, int), 'show_start_end variable has to be a boolean'
@@ -238,3 +240,18 @@ class bio_seq:
 
         return ham_dist_count
 
+    def substring_repeats(self, substring):
+        """
+        Find the indices where the substring in question show up in the main
+        sequence
+        """
+        indices = []
+        length_substr = len(substring)
+        for i in range(0, len(self.seq) - length_substr + 1):
+            subseq = self.seq[i:i + length_substr]
+            if subseq == substring:
+                indices.append(i+1)
+        if indices:
+            return indices
+        else:
+            return 0
