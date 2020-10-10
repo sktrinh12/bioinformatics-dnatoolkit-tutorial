@@ -42,9 +42,24 @@ def fibo_lru(n):
         return fibo_lru(n-1) + fibo_lru(n-2)
 
 
+def bottom_up_fib(n):
+    """
+    using the bottom up approach which is the fastest
+    """
+    if type(n) != int:
+        n = int(n)
+    if n ==1 or n == 2:
+        return 1
+    bottom_up = [None] * (n+1)
+    bottom_up[1] = 1
+    bottom_up[2] = 1
+    for i in range(3, n+1):
+        bottom_up[i] = bottom_up[i-1] + bottom_up[i-2]
+    return bottom_up[n]
+
 
 if __name__ == "__main__":
-    fibo_cache = {}
+    # fibo_cache = {}
     # for n in range(1,20):
     #     print(f'n={n} : {fibo(n)}')
 
@@ -61,4 +76,5 @@ if __name__ == "__main__":
     with open('rosalind_fibo.txt') as f:
         n = f.readline()
     print(n)
-    print(fibo(int(n)))
+    # print(fibo(int(n)))
+    print(bottom_up_fib(n))
