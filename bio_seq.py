@@ -51,7 +51,7 @@ class bio_seq:
 
     def nucleotide_frequency(self):
         """
-        Count nucleotides in  a given sequence. Reutnrs a dictionary
+        Count nucleotides in  a given sequence. Returns a dictionary
         """
         return dict(Counter(self.seq))
 
@@ -255,3 +255,14 @@ class bio_seq:
             return indices
         else:
             return 0
+
+    @staticmethod
+    def monoisotopic_mass(aminoacid_residue):
+        """
+        calculates the monoisotopic mass of the provided amino acid resiude
+        """
+        mono_mass = 0
+        for aa in aminoacid_residue:
+            mono_mass += MONOISOTOPIC_MASS_TABLE[aa]
+
+        return mono_mass
