@@ -50,6 +50,7 @@ def bottom_up_fib(n):
         n = int(n)
     if n ==1 or n == 2:
         return 1
+    # instantiate the number of elements in sequence
     bottom_up = [None] * (n+1)
     bottom_up[1] = 1
     bottom_up[2] = 1
