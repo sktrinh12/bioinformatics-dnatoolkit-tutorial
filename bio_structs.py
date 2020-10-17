@@ -55,6 +55,7 @@ RNA_CODONS = {
     "UAU": "Y", "UAC": "Y",
     "UAA": "_", "UAG": "_", "UGA": "_"
 }
+
 # The monoisotopic mass table for amino acids is a table listing the mass of each possible amino acid residue, where the value of the mass used is the monoisotopic mass of each residue.
 MONOISOTOPIC_MASS_TABLE = {
         'A':71.03711,
