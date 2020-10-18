@@ -78,6 +78,42 @@ def mendel_prob(k,m,n):
     return (1-recessProb) # take the complement
 
 
+def mendl_prob_v2(k,m,n):
+    """
+    translated from F# from this blog post:
+    https://nadrees.wordpress.com/2015/01/09/rosalind-in-f-mendels-first-law/
+    """
+    k = int(k)
+    m = int(m)
+    n = int(n)
+    population = k + m + n
+    # odds when we pick a dominate first
+    # The probability that parent 1 is AA
+    pK = k / population
+
+    # according to the Punnett squares above, we know with what probability
+    # each pair of parents will produce an offspring with a dominant allele.
+    # Substituting those numbers as percentages we obtain the probabilities
+
+    # odds when we pick a heterozygous first
+    # The probability that parent 1 is Aa * the probability parent 2 is AA * 100%
+    pMK = (m / population) * (k / (population - 1)) # due to no replacement
+    # The probability that parent 1 is Aa * the probability parent 2 is Aa * 75%
+    pMM = (m / population) * ((m - 1) / (population - 1)) * 0.75
+    # The probability that parent 1 is Aa * the probability parent 2 is aa * 50%
+    pMN = (m / population) * (n / (population - 1))*0.5
+
+    # odds when we choose a recessive first
+    # The probability that parent 1 is aa * the probability parent 2 is aA * 50%
+    pNM = (n / population) * (m / (population - 1)) * 0.5
+    # The probability that parent 1 is aa * the probability parent 2 is AA * 100%
+    pNK = (n / population) * (k / (population - 1))
+
+    result = pK + pMK + pMM + pMN + pNK + pNM
+    return result
+
+
+
 input_vaues = readTextFile('rosalind_iprb.txt')
 k, m, n = input_vaues.split(' ')
 print()
@@ -86,6 +122,9 @@ print(f'k={k}, m={m}, n={n}')
 if k and m and n:
     res_1 = mendel_prob(k,m,n)
     res_2 = mendel_simulation(k,m,n)
+    res_3 = mendl_prob_v2(k,m,n)
     print(res_1)
     print('='*20)
     print(res_2)
+    print('='*20)
+    print(res_3)
