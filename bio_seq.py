@@ -135,6 +135,7 @@ class bio_seq:
 
         freqDict = dict(Counter(tmpList))
         totalWeight = sum(freqDict.values())
+        # divide each motif by the total number (weight)
         for seq in freqDict:
             freqDict[seq] = round(freqDict[seq] / totalWeight, 2)
         return freqDict
