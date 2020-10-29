@@ -2,3 +2,4 @@ __pycache__
 *.txt
 *.fasta
 rosalind/armory/import_template.py
+*ipynb
