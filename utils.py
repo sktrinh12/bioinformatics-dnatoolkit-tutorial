@@ -1,3 +1,5 @@
+import re
+
 def coloured(seq):
     bcolours = {
         'A' : '\033[92m',
@@ -52,3 +54,23 @@ def read_FASTA(file_path):
             FASTA_dct[FASTA_label] += line
 
     return FASTA_dct
+
+def read_FASTQ(file_path):
+    """
+    read FASTQ file and return FASTA format
+    """
+    with open(file_path, 'r') as f:
+        FASTQ_file = [l.strip() for l in f.readlines()]
+
+    FASTQ_dct = {}
+    FASTQ_label = ''
+
+    for line in FASTQ_file:
+        if re.search('^@',line) and re.search('[a-z]+', line):
+            FASTQ_label = line
+            FASTQ_dct[FASTQ_label] = ''
+        elif re.search('^[A|C|G|T]*$', line):
+            FASTQ_dct[FASTQ_label] += line
+
+    return FASTQ_dct
+
