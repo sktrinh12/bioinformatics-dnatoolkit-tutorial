@@ -6,20 +6,20 @@ from itertools import compress
 import os
 # import sys
 
-def generate_motifs(seq):
-    """
-    generate substring motifs from the dna string sequence
-    """
-    motifs = []
-    sq_len = len(seq)
-    for i in range(sq_len):
-        decrement = sq_len - i
-        for j in range(decrement):
-            sbseq = seq[i:i+j+1]
-            if len(sbseq) > 1:
-                motifs.append(sbseq)
-    # print(f'{i} {j} {decrement} {seq}')
-    return motifs
+# def generate_motifs(seq):
+#     """
+#     generate substring motifs from the dna string sequence
+#     """
+#     motifs = []
+#     sq_len = len(seq)
+#     for i in range(sq_len):
+#         decrement = sq_len - i
+#         for j in range(decrement):
+#             sbseq = seq[i:i+j+1]
+#             if len(sbseq) > 1:
+#                 motifs.append(sbseq)
+#     # print(f'{i} {j} {decrement} {seq}')
+#     return motifs
 
 def match_seq(subseq, srch_sequence):
     """
