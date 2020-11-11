@@ -1,4 +1,6 @@
 import re
+import os
+from bio_structs import MONOISOTOPIC_MASS_TABLE
 
 def coloured(seq):
     bcolours = {
@@ -36,22 +38,35 @@ def writeTextFile(file_path, seq, mode = 'w'):
     with open(file_path, mode) as f:
         f.write(seq + '\n')
 
-def read_FASTA(file_path):
+def read_FASTA(input_var):
     """
-    read FASTA file
+    read FASTA file or string input
     """
-    with open(file_path, 'r') as f:
-        FASTA_file = [l.strip() for l in f.readlines()]
 
     FASTA_dct = {}
     FASTA_label = ''
 
-    for line in FASTA_file:
-        if '>' in line:
-            FASTA_label = line
-            FASTA_dct[FASTA_label] = ''
-        else:
-            FASTA_dct[FASTA_label] += line
+    if os.path.exists(input_var):
+        with open(file_path, 'r') as f:
+            FASTA_file = [l.strip() for l in f.readlines()]
+
+        for line in FASTA_file:
+            if '>' in line:
+                FASTA_label = line
+                FASTA_dct[FASTA_label] = ''
+            else:
+                FASTA_dct[FASTA_label] += line
+    else:
+        try:
+            for subtext in input_var.split('\n'):
+                if '>' in subtext:
+                    FASTA_label = subtext
+                    FASTA_dct[FASTA_label] = ''
+                else:
+                    FASTA_dct[FASTA_label] += subtext
+            assert set(MONOISOTOPIC_MASS_TABLE.keys()).issuperset(FASTA_dct[FASTA_label]), f"invalid amino acids detected - {FASTA_dct[FASTA_label]}"
+        except Exception as e:
+            print(e)
 
     return FASTA_dct
 
