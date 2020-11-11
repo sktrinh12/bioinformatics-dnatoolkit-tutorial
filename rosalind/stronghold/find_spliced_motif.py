@@ -121,6 +121,9 @@ if __name__ == "__main__":
 
     dct_motif_ix = {}
     dct_motif_ix[0] = find_motif(dna_str, subseq)
+    # loop up to the index number + length of the subsequence that equals the
+    # total length of the dna string; in practice it cycled to the beginning again;
+    # so added the logic to check greater than between indices
     for ix in range(len(dna_str)-len(subseq)-1):
         m = find_motif(dna_str, subseq, ix)
         if check_gt(m):
@@ -136,7 +139,7 @@ if __name__ == "__main__":
     print('='*50)
     print()
     dct_len = len(dct_motif_ix.keys())
-    rand_select = random.randint(0,dct_len)
+    rand_select = random.randint(0,dct_len-1)
     # print(rand_select)
     indices = dct_motif_ix[rand_select]
     print(' '.join([str(ix) for ix in indices]))
