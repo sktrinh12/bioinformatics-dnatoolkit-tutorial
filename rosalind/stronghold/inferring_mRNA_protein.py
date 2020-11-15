@@ -1,6 +1,5 @@
 from import_template import *
 from bio_structs import RNA_CODONS
-from sys import maxsize
 
 a = 29
 b = 73
@@ -50,7 +49,7 @@ print('='*50)
 print(AA)
 # AA = 'MA'
 
-combos = 3 # three stop codons
+combos = len(PROTEIN_RNA_CODONS['_']) # three stop codons
 for aa in AA:
     combos = combos * len(PROTEIN_RNA_CODONS[aa]) % 1e6
 
