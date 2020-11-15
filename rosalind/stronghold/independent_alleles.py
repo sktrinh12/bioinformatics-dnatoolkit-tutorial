@@ -72,7 +72,7 @@ import re
 # +-----+--------+--------+--------+-------+
 # |     |  AB    |  Ab    |  aB    |  ab   |
 # +-----+--------+--------+--------+-------+
-# | AB  | AA BB  | AA Bb  | Aa Bb  | Aa Bb |
+# | AB  | AA BB  | AA Bb  | Aa BB  | Aa Bb |
 # | Ab  | AA bB  | AA bb  | Aa bB  | Aa bb |
 # | aB  | aA BB  | aA Bb  | aa BB  | aa Bb |
 # | ab  | aA bB  | aA bb  | aa bB  | aa bb |
