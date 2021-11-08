@@ -139,6 +139,14 @@ def permutations(n):
 #             sleep(1)
 #             c = 0
 
+## ALTERNATIVE METHOD USING RECURSION
+def permute2(l):
+    return [ (m[:i] + [l[0]] + m[i:]) for m in permute2(l[1:]) for i in range(len(m)+1) ] if len(l) >1 else [l]
+
+# p = permute2(range(1, n+1))
+# print(len(p))
+# for l in p:
+#     prin(' '.join(map(str,l)))
 
 if __name__ == '__main__':
     num = int(sys.argv[1]) if len(sys.argv) > 1 else 3
